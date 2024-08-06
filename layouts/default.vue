@@ -1,41 +1,41 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { DumbbellIcon, MoonIcon, SunIcon } from 'lucide-vue-next';
+import { useDark, useToggle } from '@vueuse/core'
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+
+const headerRef = ref<HTMLDivElement | null>(null)
+
+
+</script>
+
 
 <template>
-    <div class="min-h-screen flex flex-col  text-gray-100 max-w-4xl mx-auto">
-      <header class=" text-white p-4 mx-auto">
-
-        <nav class="flex gap-4">
-                <NuxtLink to="/">Home</NuxtLink>
-                <NuxtLink to="/assistant">Assistant</NuxtLink>
-                <NuxtLink to="/completion">Completion</NuxtLink>
-                <NuxtLink to="/function-calling">Function calling</NuxtLink>
-                <NuxtLink to="/vision">Chat with Vision</NuxtLink>
-            </nav>
-      </header>
-      <main class="flex-grow container mx-auto px-4 py-8">
-        <slot />
+  <Toaster />
+  <div
+    class="absolute top-0 z-[-2] min-h-screen w-full bg-white dark:bg-neutral-950 bg-radial-blue dark:bg-radial-purple">
+    <div class="flex flex-col min-h-screen  max-w-6xl mx-auto">
+      <TheHeader />
+      <main class="flex-1 container mx-auto py-12 px-6 ">
+        <NuxtPage />
       </main>
-      <!-- <footer class=" text-center p-4">
-        <p class="text-sm text-gray-400">© 2024 Miguel Ramos</p>
-      </footer> -->
+      <TheFooter />
     </div>
-  </template>
+  </div>
+</template>
 
 <style>
-.router-link-exact-active {
-    color: #12b488;
-}
+/* .router-link-exact-active {
+  color: #12b488;
+} */
 
 :root {
-    color-scheme: light dark;
+  color-scheme: light dark;
 }
 
 html {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-body {
-    background: #050505;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 </style>

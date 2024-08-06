@@ -13,7 +13,14 @@ export default defineLazyEventHandler(async () => {
     // Call the language model
     const result = await streamText({
       model: openai("gpt-4o-mini"),
-      messages: convertToCoreMessages(messages),
+      messages: [
+        ...convertToCoreMessages(messages),
+        {
+          role: "system",
+          content:
+            "Respond with a valid JSON object containing the workout plan. Do not include any explanatory text outside the JSON structure. Please provide your response with the following structure: { 'warmup': [{'name': 'exercise name', 'repetitions': 'number', 'sets': 'number'}], 'mainWorkout': [{'name': 'exercise name', 'repetitions': 'number', 'sets': 'number'}], 'cooldown': [{'name': 'exercise name', 'repetitions': 'number', 'sets': 'number'}] }",
+        },
+      ],
       async onFinish({ text, toolCalls, toolResults, usage, finishReason }) {
         // implement your own logic here, e.g. for storing messages
         // or recording token usage
